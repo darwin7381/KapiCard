@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Search, TrendingUp, Award, Shield, Sparkles, ArrowRight, Zap, BookOpen, Star } from 'lucide-react';
+import { Search, TrendingUp, Award, Shield, Sparkles, ArrowRight, Zap, BookOpen, Star, DollarSign } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreditCard from '../components/CreditCard';
@@ -257,27 +257,95 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Best Cashback Cards */}
+            {/* Best Cashback Cards - Horizontal Scroll */}
             <section className="py-20 bg-gradient-to-br from-accent/5 to-primary/5">
                 <div className="container mx-auto px-4">
-                    <div className="flex items-center gap-3 mb-8">
-                        <div className="text-3xl">💰</div>
-                        <div>
-                            <h2 className="text-3xl font-bold text-text-main">Best Cashback Cards</h2>
-                            <p className="text-text-muted">Earn money back on every purchase</p>
+                    <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center gap-3">
+                            <DollarSign className="w-8 h-8 text-accent" />
+                            <div>
+                                <h2 className="text-3xl font-bold text-text-main">Best Cashback Cards</h2>
+                                <p className="text-text-muted">Earn money back on every purchase</p>
+                            </div>
                         </div>
+                        <Link to="/cards?type=cashback" className="text-primary font-medium hover:underline flex items-center gap-1">
+                            View All <ArrowRight className="w-4 h-4" />
+                        </Link>
                     </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {cashbackCards.map(card => (
-                            <motion.div
-                                key={card.id}
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                viewport={{ once: true }}
-                            >
-                                <CompactCard card={card} />
-                            </motion.div>
-                        ))}
+
+                    {/* Horizontal Scroll Container */}
+                    <div className="relative">
+                        <div className="overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+                            <div className="flex gap-6 min-w-max">
+                                {cashbackCards.map((card, index) => (
+                                    <motion.div
+                                        key={card.id}
+                                        initial={{ opacity: 0, x: 20 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className="w-80 flex-shrink-0"
+                                    >
+                                        <GlassCard className="p-6 h-full hover:shadow-xl transition-all group">
+                                            {/* Card Visual */}
+                                            <div className={`aspect-[1.586/1] rounded-xl bg-gradient-to-br ${card.network === 'Visa' ? 'from-blue-500 via-blue-600 to-indigo-700' :
+                                                    card.network === 'Mastercard' ? 'from-orange-400 via-red-500 to-pink-600' :
+                                                        'from-blue-400 via-cyan-500 to-teal-600'
+                                                } mb-4 relative overflow-hidden shadow-lg`}>
+                                                <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent" />
+                                                <div className="absolute top-3 left-3 w-10 h-7 rounded bg-yellow-200/90" />
+                                                <div className="absolute bottom-3 left-3 text-white font-mono text-sm drop-shadow">
+                                                    **** **** **** {card.id}234
+                                                </div>
+                                                <div className="absolute top-3 right-3 text-white font-bold text-sm italic">
+                                                    {card.network === 'American Express' ? 'AMEX' : card.network.toUpperCase()}
+                                                </div>
+                                            </div>
+
+                                            {/* Content */}
+                                            <div className="space-y-3">
+                                                <div className="flex items-start justify-between">
+                                                    <div>
+                                                        <h3 className="font-bold text-lg text-text-main group-hover:text-primary transition-colors">{card.name}</h3>
+                                                        <p className="text-sm text-text-muted">{card.bank}</p>
+                                                    </div>
+                                                    <div className="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-md border border-yellow-200">
+                                                        <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-400" />
+                                                        <span className="text-xs font-bold text-yellow-700">{card.rating}</span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Highlight cashback rate */}
+                                                <div className="bg-accent/10 border border-accent/20 rounded-lg p-3">
+                                                    <p className="text-xs text-accent font-medium mb-1">Cashback Rate</p>
+                                                    <p className="text-2xl font-bold text-accent">{card.rewardRate}</p>
+                                                </div>
+
+                                                <div className="grid grid-cols-2 gap-2 text-xs">
+                                                    <div>
+                                                        <p className="text-text-muted">Annual Fee</p>
+                                                        <p className="font-semibold text-text-main">{card.annualFee}</p>
+                                                    </div>
+                                                    <div>
+                                                        <p className="text-text-muted">Bonus</p>
+                                                        <p className="font-semibold text-text-main">{card.signUpBonus}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex gap-2 pt-2">
+                                                    <Button variant="outline" size="sm" className="flex-1 text-xs">
+                                                        Compare
+                                                    </Button>
+                                                    <Button size="sm" className="flex-1 text-xs">
+                                                        Apply
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </GlassCard>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

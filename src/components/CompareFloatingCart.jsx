@@ -1,19 +1,28 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { GitCompare, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useCompare } from '../context/CompareContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const CompareFloatingCart = () => {
     const { compareCards, compareCount, removeFromCompare } = useCompare();
     const [isExpanded, setIsExpanded] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Auto-close when navigating to Compare page
+    useEffect(() => {
+        if (location.pathname === '/compare') {
+            setIsExpanded(false);
+        }
+    }, [location.pathname]);
 
     if (compareCount === 0) {
         return null;
     }
 
     const handleNavigateToCompare = () => {
+        setIsExpanded(false); // Close immediately
         navigate('/compare');
     };
 

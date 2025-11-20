@@ -1,13 +1,17 @@
 const Badge = ({ children, variant = 'primary', className = '' }) => {
     const variants = {
-        primary: "bg-primary/10 text-primary border-primary/20",
-        secondary: "bg-secondary/10 text-secondary border-secondary/20",
-        outline: "border border-text-muted/20 text-text-muted",
-        accent: "bg-accent/10 text-accent-dark border-accent/20",
+        primary: "bg-primary/5 text-primary/90 border-primary/10",
+        secondary: "bg-secondary/5 text-secondary/90 border-secondary/10",
+        outline: "border border-border text-text-muted",
+        accent: "bg-accent/5 text-accent border-accent/10",
+        success: "bg-green-50 text-green-700 border-green-200",
+        warning: "bg-yellow-50 text-yellow-700 border-yellow-200",
+        danger: "bg-red-50 text-red-700 border-red-200",
+        info: "bg-blue-50 text-blue-700 border-blue-200",
     };
 
     return (
-        <span className={`px-3 py-1 rounded-full text-xs font-medium border ${variants[variant]} ${className}`}>
+        <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-medium border ${variants[variant]} ${className}`}>
             {children}
         </span>
     );
