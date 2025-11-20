@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Search, TrendingUp, Award, Shield, Sparkles, ArrowRight, Zap, BookOpen, Star, DollarSign } from 'lucide-react';
+import { Search, TrendingUp, Award, Shield, Sparkles, ArrowRight, Zap, BookOpen, Star, DollarSign, Crown } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CreditCard from '../components/CreditCard';
@@ -106,14 +106,14 @@ const Home = () => {
                                     key={index}
                                     to={`/cards?type=${encodeURIComponent(cat.type)}`}
                                 >
-                                    <motion.button
+                                    <motion.div
                                         whileHover={{ scale: 1.05, y: -2 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="px-5 py-2.5 rounded-full bg-white border-2 border-primary/20 hover:border-primary/50 shadow-md hover:shadow-lg transition-all flex items-center gap-2 text-text-main font-medium"
+                                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/40 backdrop-blur-md border border-white/30 shadow-sm hover:shadow-md hover:bg-white/60 transition-all cursor-pointer text-text-main"
                                     >
                                         <span className="text-lg">{cat.icon}</span>
-                                        {cat.name}
-                                    </motion.button>
+                                        <span className="text-sm font-medium">{cat.name}</span>
+                                    </motion.div>
                                 </Link>
                             ))}
                         </div>
@@ -257,94 +257,96 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Best Cashback Cards - Horizontal Scroll */}
-            <section className="py-20 bg-gradient-to-br from-accent/5 to-primary/5">
-                <div className="container mx-auto px-4">
-                    <div className="flex items-center justify-between mb-8">
-                        <div className="flex items-center gap-3">
-                            <DollarSign className="w-8 h-8 text-accent" />
-                            <div>
-                                <h2 className="text-3xl font-bold text-text-main">Best Cashback Cards</h2>
-                                <p className="text-text-muted">Earn money back on every purchase</p>
-                            </div>
-                        </div>
-                        <Link to="/cards?type=cashback" className="text-primary font-medium hover:underline flex items-center gap-1">
-                            View All <ArrowRight className="w-4 h-4" />
-                        </Link>
+            {/* Best Cashback Cards - Bento Grid Dark Theme */}
+            <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+                {/* Background Accents */}
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-t from-secondary/10 to-transparent pointer-events-none" />
+
+                <div className="container mx-auto px-4 relative z-10">
+                    <div className="mb-12">
+                        <Badge variant="accent" className="mb-4 bg-accent/20 text-accent border-accent/20">Top Picks</Badge>
+                        <h2 className="text-4xl font-bold mb-4">Maximize Your Cashback</h2>
+                        <p className="text-slate-400 text-lg max-w-2xl">
+                            Stop leaving money on the table. These cards offer the highest returns on your daily spending.
+                        </p>
                     </div>
 
-                    {/* Horizontal Scroll Container */}
-                    <div className="relative">
-                        <div className="overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
-                            <div className="flex gap-6 min-w-max">
-                                {cashbackCards.map((card, index) => (
-                                    <motion.div
-                                        key={card.id}
-                                        initial={{ opacity: 0, x: 20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: index * 0.1 }}
-                                        className="w-80 flex-shrink-0"
-                                    >
-                                        <GlassCard className="p-6 h-full hover:shadow-xl transition-all group">
-                                            {/* Card Visual */}
-                                            <div className={`aspect-[1.586/1] rounded-xl bg-gradient-to-br ${card.network === 'Visa' ? 'from-blue-500 via-blue-600 to-indigo-700' :
-                                                    card.network === 'Mastercard' ? 'from-orange-400 via-red-500 to-pink-600' :
-                                                        'from-blue-400 via-cyan-500 to-teal-600'
-                                                } mb-4 relative overflow-hidden shadow-lg`}>
-                                                <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent" />
-                                                <div className="absolute top-3 left-3 w-10 h-7 rounded bg-yellow-200/90" />
-                                                <div className="absolute bottom-3 left-3 text-white font-mono text-sm drop-shadow">
-                                                    **** **** **** {card.id}234
-                                                </div>
-                                                <div className="absolute top-3 right-3 text-white font-bold text-sm italic">
-                                                    {card.network === 'American Express' ? 'AMEX' : card.network.toUpperCase()}
-                                                </div>
+                    <div className="grid lg:grid-cols-5 gap-8">
+                        {/* Main Feature - Spans 3 cols */}
+                        <div className="lg:col-span-3">
+                            <div className="bg-white/5 border border-white/10 rounded-3xl p-8 h-full hover:bg-white/10 transition-colors group">
+                                {/* Big Card Visual & Details */}
+                                <div className="flex flex-col md:flex-row gap-8 items-center h-full">
+                                    <div className="w-full md:w-1/2">
+                                        {/* 3D Card Tilt Effect Placeholder - using standard card for now */}
+                                        <div className="transform group-hover:scale-105 transition-transform duration-500">
+                                            <CreditCard card={cashbackCards[0]} />
+                                        </div>
+                                    </div>
+                                    <div className="flex-1 space-y-6">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <Crown className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                                                <span className="text-yellow-400 font-bold tracking-wide text-sm">EDITOR'S CHOICE</span>
                                             </div>
+                                            <h3 className="text-3xl font-bold">{cashbackCards[0].name}</h3>
+                                            <p className="text-slate-400">{cashbackCards[0].bank}</p>
+                                        </div>
 
-                                            {/* Content */}
-                                            <div className="space-y-3">
-                                                <div className="flex items-start justify-between">
-                                                    <div>
-                                                        <h3 className="font-bold text-lg text-text-main group-hover:text-primary transition-colors">{card.name}</h3>
-                                                        <p className="text-sm text-text-muted">{card.bank}</p>
-                                                    </div>
-                                                    <div className="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-md border border-yellow-200">
-                                                        <Star className="w-3.5 h-3.5 text-yellow-500 fill-yellow-400" />
-                                                        <span className="text-xs font-bold text-yellow-700">{card.rating}</span>
-                                                    </div>
-                                                </div>
-
-                                                {/* Highlight cashback rate */}
-                                                <div className="bg-accent/10 border border-accent/20 rounded-lg p-3">
-                                                    <p className="text-xs text-accent font-medium mb-1">Cashback Rate</p>
-                                                    <p className="text-2xl font-bold text-accent">{card.rewardRate}</p>
-                                                </div>
-
-                                                <div className="grid grid-cols-2 gap-2 text-xs">
-                                                    <div>
-                                                        <p className="text-text-muted">Annual Fee</p>
-                                                        <p className="font-semibold text-text-main">{card.annualFee}</p>
-                                                    </div>
-                                                    <div>
-                                                        <p className="text-text-muted">Bonus</p>
-                                                        <p className="font-semibold text-text-main">{card.signUpBonus}</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex gap-2 pt-2">
-                                                    <Button variant="outline" size="sm" className="flex-1 text-xs">
-                                                        Compare
-                                                    </Button>
-                                                    <Button size="sm" className="flex-1 text-xs">
-                                                        Apply
-                                                    </Button>
-                                                </div>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                                                <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">Cashback</p>
+                                                <p className="text-2xl font-bold text-accent">{cashbackCards[0].rewardRate}</p>
                                             </div>
-                                        </GlassCard>
-                                    </motion.div>
-                                ))}
+                                            <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                                                <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">Annual Fee</p>
+                                                <p className="text-2xl font-bold">{cashbackCards[0].annualFee}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex gap-3 pt-2">
+                                            <Button className="flex-1 bg-white text-slate-900 hover:bg-slate-200 border-none">Apply Now</Button>
+                                            <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10 hover:text-white">Compare</Button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                        </div>
+
+                        {/* Side List - Spans 2 cols */}
+                        <div className="lg:col-span-2 flex flex-col gap-4 justify-center">
+                            <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+                                <TrendingUp className="w-5 h-5 text-accent" />
+                                Top Contenders
+                            </h3>
+                            {cashbackCards.slice(1, 4).map((card, idx) => (
+                                <Link key={card.id} to={`/cards/${card.id}`}>
+                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-4 hover:bg-white/10 transition-all cursor-pointer group hover:translate-x-1">
+                                        {/* Small Visual */}
+                                        <div className={`w-16 h-10 rounded-md shadow-sm flex-shrink-0 bg-gradient-to-br ${card.network === 'Visa' ? 'from-blue-500 to-indigo-700' :
+                                                card.network === 'Mastercard' ? 'from-orange-400 to-pink-600' :
+                                                    'from-blue-400 to-teal-600'
+                                            }`} />
+
+                                        <div className="flex-1 min-w-0">
+                                            <h4 className="font-bold truncate group-hover:text-primary transition-colors">{card.name}</h4>
+                                            <div className="flex items-center gap-2 text-sm">
+                                                <span className="text-accent font-medium">{card.rewardRate}</span>
+                                                <span className="text-slate-500">•</span>
+                                                <span className="text-slate-400">{card.annualFee}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+                                            <ArrowRight className="w-4 h-4" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                            <Link to="/cards?type=cashback" className="mt-2 text-center text-sm text-slate-400 hover:text-white transition-colors flex items-center justify-center gap-1">
+                                View all cashback cards <ArrowRight className="w-3 h-3" />
+                            </Link>
                         </div>
                     </div>
                 </div>
