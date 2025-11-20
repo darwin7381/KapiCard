@@ -72,21 +72,30 @@ const Home = () => {
                         {/* Large Search Box */}
                         <div className="relative max-w-3xl mx-auto mb-8">
                             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur-xl" />
-                            <div className="relative bg-surface border-2 border-border rounded-2xl p-2 shadow-xl">
-                                <div className="flex items-center gap-3">
-                                    <Search className="w-6 h-6 text-text-muted ml-4" />
-                                    <input
-                                        type="text"
-                                        placeholder="Search by card name, bank, or benefits..."
-                                        value={searchQuery}
-                                        onChange={(e) => setSearchQuery(e.target.value)}
-                                        onKeyDown={handleSearch}
-                                        className="flex-1 py-4 px-2 text-lg bg-transparent focus:outline-none text-text-main placeholder:text-text-muted"
-                                    />
-                                    <Button onClick={handleSearch} className="px-8">
-                                        Search
-                                    </Button>
-                                </div>
+                            <div className="relative group">
+                                <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-text-muted group-focus-within:text-primary transition-colors duration-200 z-10" />
+                                <input
+                                    type="text"
+                                    placeholder="Search by card name, bank, or benefits..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    onKeyDown={handleSearch}
+                                    className="w-full pl-14 pr-32 py-4 rounded-2xl bg-white/90 backdrop-blur-sm
+                                               border-2 border-border focus:border-primary
+                                               focus:outline-none focus:ring-4 focus:ring-primary/20
+                                               text-base shadow-xl hover:shadow-2xl focus:shadow-2xl
+                                               transition-all duration-300 text-text-main placeholder:text-text-muted"
+                                />
+                                <button
+                                    onClick={handleSearch}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2
+                                               bg-gradient-to-r from-primary to-secondary
+                                               text-white px-6 py-2.5 rounded-xl font-medium
+                                               hover:shadow-lg hover:scale-105 active:scale-95
+                                               transition-all duration-200"
+                                >
+                                    Search
+                                </button>
                             </div>
                         </div>
 

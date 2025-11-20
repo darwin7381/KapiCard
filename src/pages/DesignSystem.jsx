@@ -48,6 +48,24 @@ const DesignSystem = () => {
         { name: '3xl', value: '4rem', pixels: '64px' },
     ];
 
+    const shadows = [
+        { name: 'sm', value: '0 1px 2px rgba(0,0,0,0.05)', usage: 'Subtle elevation' },
+        { name: 'md', value: '0 4px 6px rgba(0,0,0,0.1)', usage: 'Cards, dropdowns' },
+        { name: 'lg', value: '0 10px 15px rgba(0,0,0,0.1)', usage: 'Modals, popovers' },
+        { name: 'xl', value: '0 20px 25px rgba(0,0,0,0.15)', usage: 'Hero elements' },
+        { name: '2xl', value: '0 25px 50px rgba(0,0,0,0.25)', usage: 'Maximum depth' },
+        { name: 'glow', value: '0 0 20px rgba(139,92,246,0.3)', usage: 'Interactive highlights' },
+    ];
+
+    const borderRadius = [
+        { name: 'sm', value: '0.375rem', pixels: '6px' },
+        { name: 'md', value: '0.5rem', pixels: '8px' },
+        { name: 'lg', value: '0.75rem', pixels: '12px' },
+        { name: 'xl', value: '1rem', pixels: '16px' },
+        { name: '2xl', value: '1.5rem', pixels: '24px' },
+        { name: 'full', value: '9999px', pixels: 'Full circle' },
+    ];
+
     return (
         <div className="min-h-screen bg-background">
             <SEO
@@ -172,6 +190,174 @@ const DesignSystem = () => {
                             <p className="text-text-muted">Monospace: <code className="bg-surface-hover px-2 py-1 rounded font-mono">Menlo, Monaco, monospace</code></p>
                         </GlassCard>
                     </div>
+                </section>
+
+                {/* Shadow System */}
+                <section className="mb-20">
+                    <h2 className="text-3xl font-bold text-text-main mb-8">Shadow System</h2>
+                    <GlassCard>
+                        <div className="divide-y divide-border">
+                            {shadows.map((shadow) => (
+                                <div key={shadow.name} className="p-6 flex items-center gap-8">
+                                    <div className="w-32">
+                                        <p className="font-bold text-text-main">{shadow.name}</p>
+                                        <p className="text-sm text-text-muted">{shadow.usage}</p>
+                                    </div>
+                                    <div className="flex-1">
+                                        <div
+                                            className="w-32 h-32 bg-surface rounded-xl"
+                                            style={{ boxShadow: shadow.value }}
+                                        ></div>
+                                    </div>
+                                    <code className="text-xs text-text-muted max-w-xs">{shadow.value}</code>
+                                </div>
+                            ))}
+                        </div>
+                    </GlassCard>
+                </section>
+
+                {/* Border Radius */}
+                <section className="mb-20">
+                    <h2 className="text-3xl font-bold text-text-main mb-8">Border Radius</h2>
+                    <GlassCard>
+                        <div className="divide-y divide-border">
+                            {borderRadius.map((radius) => (
+                                <div key={radius.name} className="p-6 flex items-center gap-8">
+                                    <div className="w-24">
+                                        <p className="font-bold text-text-main">{radius.name}</p>
+                                        <p className="text-sm text-text-muted">{radius.pixels}</p>
+                                    </div>
+                                    <div className="flex-1">
+                                        <div
+                                            className="w-24 h-24 bg-primary"
+                                            style={{ borderRadius: radius.value }}
+                                        ></div>
+                                    </div>
+                                    <code className="text-sm text-text-muted">{radius.value}</code>
+                                </div>
+                            ))}
+                        </div>
+                    </GlassCard>
+                </section>
+
+                {/* Animation & Transitions */}
+                <section className="mb-20">
+                    <h2 className="text-3xl font-bold text-text-main mb-8">Animation & Transitions</h2>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <GlassCard className="p-6">
+                            <h3 className="font-bold text-text-main mb-4">Duration</h3>
+                            <ul className="space-y-2 text-text-muted">
+                                <li><code className="bg-surface-hover px-2 py-1 rounded">150ms</code> - Quick interactions</li>
+                                <li><code className="bg-surface-hover px-2 py-1 rounded">200ms</code> - Standard transitions</li>
+                                <li><code className="bg-surface-hover px-2 py-1 rounded">300ms</code> - Smooth animations</li>
+                                <li><code className="bg-surface-hover px-2 py-1 rounded">500ms</code> - Complex animations</li>
+                            </ul>
+                        </GlassCard>
+                        <GlassCard className="p-6">
+                            <h3 className="font-bold text-text-main mb-4">Easing Functions</h3>
+                            <ul className="space-y-2 text-text-muted">
+                                <li><code className="bg-surface-hover px-2 py-1 rounded">ease-in-out</code> - Smooth start & end</li>
+                                <li><code className="bg-surface-hover px-2 py-1 rounded">ease-out</code> - Natural deceleration</li>
+                                <li><code className="bg-surface-hover px-2 py-1 rounded">ease-in</code> - Smooth acceleration</li>
+                            </ul>
+                        </GlassCard>
+                        <GlassCard className="p-6">
+                            <h3 className="font-bold text-text-main mb-4">Scale Transforms</h3>
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-16 h-16 bg-primary rounded-lg hover:scale-105 transition-transform cursor-pointer"></div>
+                                    <code className="text-sm">hover:scale-105</code>
+                                </div>
+                                <div className="flex items-center gap-4">
+                                    <div className="w-16 h-16 bg-secondary rounded-lg hover:scale-110 transition-transform cursor-pointer"></div>
+                                    <code className="text-sm">hover:scale-110</code>
+                                </div>
+                            </div>
+                        </GlassCard>
+                        <GlassCard className="p-6">
+                            <h3 className="font-bold text-text-main mb-4">Motion Principles</h3>
+                            <ul className="space-y-2 text-text-muted text-sm">
+                                <li>• Respect <code>prefers-reduced-motion</code></li>
+                                <li>• Use Framer Motion for complex sequences</li>
+                                <li>• Keep animations purposeful, not decorative</li>
+                                <li>• Maintain 60fps performance</li>
+                            </ul>
+                        </GlassCard>
+                    </div>
+                </section>
+
+                {/* Form Elements */}
+                <section className="mb-20">
+                    <h2 className="text-3xl font-bold text-text-main mb-8">Form Elements</h2>
+                    <GlassCard className="p-8">
+                        <div className="space-y-6 max-w-md">
+                            <div>
+                                <label className="block text-sm font-medium text-text-main mb-2">Text Input</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter text..."
+                                    className="w-full px-4 py-2.5 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-text-main mb-2">Select Dropdown</label>
+                                <select className="w-full px-4 py-2.5 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all">
+                                    <option>Option 1</option>
+                                    <option>Option 2</option>
+                                    <option>Option 3</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-text-main mb-2">Textarea</label>
+                                <textarea
+                                    placeholder="Enter message..."
+                                    rows={3}
+                                    className="w-full px-4 py-2.5 border border-border rounded-lg bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
+                                ></textarea>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="checkbox-demo"
+                                    className="w-4 h-4 text-primary border-border rounded focus:ring-2 focus:ring-primary/50"
+                                />
+                                <label htmlFor="checkbox-demo" className="text-sm text-text-main">Checkbox option</label>
+                            </div>
+                        </div>
+                    </GlassCard>
+                </section>
+
+                {/* Component States */}
+                <section className="mb-20">
+                    <h2 className="text-3xl font-bold text-text-main mb-8">Interactive States</h2>
+                    <GlassCard className="p-8">
+                        <div className="space-y-6">
+                            <div>
+                                <h3 className="font-bold text-text-main mb-3">Button States</h3>
+                                <div className="flex flex-wrap gap-4">
+                                    <Button>Default</Button>
+                                    <Button className="hover:opacity-90">Hover</Button>
+                                    <Button className="opacity-75">Active</Button>
+                                    <Button className="ring-2 ring-primary/50">Focus</Button>
+                                    <Button disabled className="opacity-50 cursor-not-allowed">Disabled</Button>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-text-main mb-3">Card States</h3>
+                                <div className="grid md:grid-cols-3 gap-4">
+                                    <div className="p-4 border border-border rounded-lg bg-surface">
+                                        <p className="text-sm font-medium">Default</p>
+                                    </div>
+                                    <div className="p-4 border border-border rounded-lg bg-surface-hover shadow-md">
+                                        <p className="text-sm font-medium">Hover</p>
+                                    </div>
+                                    <div className="p-4 border-2 border-primary rounded-lg bg-primary/5 ring-2 ring-primary/20">
+                                        <p className="text-sm font-medium">Selected</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </GlassCard>
                 </section>
 
                 {/* Spacing */}

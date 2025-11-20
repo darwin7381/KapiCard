@@ -43,8 +43,8 @@ const CompactCard = ({ card, selectable = false, selected = false, onSelect }) =
                 <GlassCard
                     hoverEffect
                     className={`flex flex-col h-full group relative overflow-hidden transition-all ${selected
-                            ? 'ring-2 ring-primary bg-primary/5 shadow-lg'
-                            : 'hover:shadow-md'
+                        ? 'ring-2 ring-primary bg-primary/10 shadow-lg'
+                        : 'hover:bg-surface-hover hover:shadow-md'
                         }`}
                 >
                     {/* Selection Checkmark */}
@@ -56,8 +56,8 @@ const CompactCard = ({ card, selectable = false, selected = false, onSelect }) =
 
                     {/* Gradient Glow Effect */}
                     <div className={`absolute -inset-1 bg-gradient-to-r rounded-2xl blur transition duration-500 ${selected
-                            ? 'from-primary/30 to-accent/30 opacity-100'
-                            : 'from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100'
+                        ? 'from-primary/30 to-accent/30 opacity-100'
+                        : 'from-primary/20 to-accent/20 opacity-0 group-hover:opacity-100'
                         }`} />
 
                     {/* Card Image */}
