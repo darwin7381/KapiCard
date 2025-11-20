@@ -7,11 +7,13 @@ import Compare from './pages/Compare';
 import CardDetail from './pages/CardDetail';
 import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <CompareProvider>
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />

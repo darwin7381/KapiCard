@@ -34,8 +34,20 @@ const Layout = () => {
 
                     {/* CTA & Mobile Toggle */}
                     <div className="flex items-center gap-3">
-                        <Button variant="outline" className="hidden md:flex">Login</Button>
-                        <Button className="hidden md:flex" variant="primary">Register</Button>
+                        <Button
+                            variant="outline"
+                            className="hidden md:flex"
+                            onClick={() => alert('Login functionality coming soon!')}
+                        >
+                            Login
+                        </Button>
+                        <Button
+                            className="hidden md:flex"
+                            variant="primary"
+                            onClick={() => alert('Registration functionality coming soon!')}
+                        >
+                            Register
+                        </Button>
                         <button
                             className="md:hidden p-2 text-text-main"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -57,8 +69,25 @@ const Layout = () => {
                         <Link to="/compare" className="p-2 hover:bg-primary/5 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Compare</Link>
                         <Link to="/blog" className="p-2 hover:bg-primary/5 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
                         <div className="flex gap-2">
-                            <Button variant="outline" className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>Login</Button>
-                            <Button className="flex-1" onClick={() => setIsMobileMenuOpen(false)}>Register</Button>
+                            <Button
+                                variant="outline"
+                                className="flex-1"
+                                onClick={() => {
+                                    alert('Login functionality coming soon!');
+                                    setIsMobileMenuOpen(false);
+                                }}
+                            >
+                                Login
+                            </Button>
+                            <Button
+                                className="flex-1"
+                                onClick={() => {
+                                    alert('Registration functionality coming soon!');
+                                    setIsMobileMenuOpen(false);
+                                }}
+                            >
+                                Register
+                            </Button>
                         </div>
                     </motion.div>
                 )}
