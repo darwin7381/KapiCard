@@ -1,14 +1,17 @@
 import { motion } from 'framer-motion';
 import { X, Check, Info, Trash2, Star } from 'lucide-react';
+import { useState } from 'react';
 import { cards } from '../data/cards';
 import { useCompare } from '../context/CompareContext';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import GlassCard from '../components/ui/GlassCard';
 import SEO from '../components/SEO';
+import CardSelectionModal from '../components/CardSelectionModal';
 
 const Compare = () => {
     const { compareCards, removeFromCompare, clearCompare } = useCompare();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="container mx-auto px-4 py-12">
@@ -53,6 +56,7 @@ const Compare = () => {
 
                         <table className="w-full min-w-[800px]">
                             <thead>
+                                {/* Row 1: Card Images */}
                                 <tr className="border-b border-border">
                                     <th className="text-left py-4 px-4 text-text-main font-bold sticky left-0 bg-surface z-10 w-48">Feature</th>
                                     {compareCards.map(card => {
@@ -73,13 +77,13 @@ const Compare = () => {
                                             <th key={card.id} className="text-center py-4 px-4 min-w-[220px] relative group">
                                                 <button
                                                     onClick={() => removeFromCompare(card.id)}
-                                                    className="absolute top-0 right-0 w-8 h-8 rounded-full text-text-muted hover:text-red-500 hover:bg-red-50 flex items-center justify-center transition-colors opacity-0 group-hover:opacity-100 z-10"
+                                                    className="absolute top-2 right-2 w-8 h-8 rounded-full text-text-muted hover:text-red-500 hover:bg-red-50 flex items-center justify-center transition-colors opacity-0 group-hover:opacity-100 z-10"
                                                 >
                                                     <X className="w-4 h-4" />
                                                 </button>
 
                                                 {/* Miniature Card Visual */}
-                                                <div className={`w-full max-w-[180px] mx-auto aspect-[1.586/1] rounded-lg bg-gradient-to-br ${getCardGradient()} shadow-md relative overflow-hidden border border-white/20 mb-3`}>
+                                                <div className={`w-full max-w-[180px] mx-auto aspect-[1.586/1] rounded-lg bg-gradient-to-br ${getCardGradient()} shadow-md relative overflow-hidden border border-white/20`}>
                                                     <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent" />
                                                     <div className="absolute top-2 left-2 w-6 h-4 rounded bg-yellow-200/90 border border-yellow-400/50" />
                                                     <div className="absolute bottom-2 left-2 text-white font-mono text-[8px] tracking-wider drop-shadow-lg">
@@ -89,16 +93,13 @@ const Compare = () => {
                                                         {card.network === 'American Express' ? 'AMEX' : card.network.toUpperCase()}
                                                     </div>
                                                 </div>
-
-                                                <div className="font-bold text-text-main text-lg">{card.name}</div>
-                                                <div className="text-sm text-text-muted font-normal">{card.bank}</div>
                                             </th>
                                         );
                                     })}
                                     {compareCards.length < 4 && (
                                         <th className="p-4 min-w-[220px]">
                                             <button
-                                                onClick={() => window.location.href = '/cards'}
+                                                onClick={() => setIsModalOpen(true)}
                                                 className="w-full h-full min-h-[100px] border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center gap-2 text-text-muted hover:text-primary hover:border-primary hover:bg-primary/5 transition-all"
                                             >
                                                 <div className="w-10 h-10 rounded-full bg-surface border border-border flex items-center justify-center">
@@ -108,6 +109,18 @@ const Compare = () => {
                                             </button>
                                         </th>
                                     )}
+                                </tr>
+
+                                {/* Row 2: Card Names */}
+                                <tr className="border-b-2 border-border">
+                                    <th className="sticky left-0 bg-surface z-10"></th>
+                                    {compareCards.map(card => (
+                                        <th key={card.id} className="text-center py-3 px-4">
+                                            <div className="font-bold text-text-main text-lg">{card.name}</div>
+                                            <div className="text-sm text-text-muted font-normal">{card.bank}</div>
+                                        </th>
+                                    ))}
+                                    {compareCards.length < 4 && <th></th>}
                                 </tr>
                             </thead>
                             <tbody>
@@ -175,7 +188,7 @@ const Compare = () => {
                     className="max-w-md mx-auto"
                 >
                     <button
-                        onClick={() => window.location.href = '/cards'}
+                        onClick={() => setIsModalOpen(true)}
                         className="w-full min-h-[300px] border-2 border-dashed border-border rounded-3xl hover:border-primary hover:bg-primary/5 transition-all flex flex-col items-center justify-center gap-4 text-text-muted hover:text-primary group p-8"
                     >
                         <div className="w-20 h-20 rounded-full bg-surface border-2 border-border group-hover:border-primary/30 flex items-center justify-center transition-all shadow-sm group-hover:shadow-md group-hover:scale-110">
@@ -191,6 +204,12 @@ const Compare = () => {
                     </button>
                 </motion.div>
             )}
+
+            {/* Card Selection Modal */}
+            <CardSelectionModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
         </div>
     );
 };

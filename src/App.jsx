@@ -7,6 +7,7 @@ import Compare from './pages/Compare';
 import CardDetail from './pages/CardDetail';
 import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
+import DesignSystem from './pages/DesignSystem';
 import ScrollToTop from './components/ScrollToTop';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="compare" element={<Compare />} />
             <Route path="blog" element={<BlogList />} />
             <Route path="blog/:id" element={<BlogPost />} />
+            <Route path="design-system" element={<DesignSystem />} />
           </Route>
         </Routes>
       </Router>

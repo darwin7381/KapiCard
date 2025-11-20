@@ -141,6 +141,7 @@ const Layout = () => {
                                 <li><Link to="#" className="hover:text-primary transition-colors">About Us</Link></li>
                                 <li><Link to="#" className="hover:text-primary transition-colors">Careers</Link></li>
                                 <li><Link to="#" className="hover:text-primary transition-colors">Contact</Link></li>
+                                <li><Link to="/design-system" className="hover:text-primary transition-colors">Design System</Link></li>
                                 <li><Link to="#" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
                             </ul>
                         </div>
