@@ -1,13 +1,15 @@
 import { Link, Outlet } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import Button from '../components/ui/Button';
 import SearchBar from '../components/SearchBar';
 import CompareFloatingCart from '../components/CompareFloatingCart';
+import AuthModal from '../components/AuthModal';
 import { CreditCard, BookOpen, BarChart2, Menu, X, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
-import { useState } from 'react';
 
 const Layout = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [authModal, setAuthModal] = useState({ isOpen: false, tab: 'login' });
 
     return (
         <div className="min-h-screen flex flex-col bg-background text-text-main font-sans">
@@ -37,14 +39,14 @@ const Layout = () => {
                         <Button
                             variant="outline"
                             className="hidden md:flex"
-                            onClick={() => alert('Login functionality coming soon!')}
+                            onClick={() => setAuthModal({ isOpen: true, tab: 'login' })}
                         >
                             Login
                         </Button>
                         <Button
                             className="hidden md:flex"
                             variant="primary"
-                            onClick={() => alert('Registration functionality coming soon!')}
+                            onClick={() => setAuthModal({ isOpen: true, tab: 'register' })}
                         >
                             Register
                         </Button>
@@ -73,7 +75,7 @@ const Layout = () => {
                                 variant="outline"
                                 className="flex-1"
                                 onClick={() => {
-                                    alert('Login functionality coming soon!');
+                                    setAuthModal({ isOpen: true, tab: 'login' });
                                     setIsMobileMenuOpen(false);
                                 }}
                             >
@@ -82,7 +84,7 @@ const Layout = () => {
                             <Button
                                 className="flex-1"
                                 onClick={() => {
-                                    alert('Registration functionality coming soon!');
+                                    setAuthModal({ isOpen: true, tab: 'register' });
                                     setIsMobileMenuOpen(false);
                                 }}
                             >
@@ -100,6 +102,13 @@ const Layout = () => {
 
             {/* Floating Compare Cart */}
             <CompareFloatingCart />
+
+            {/* Auth Modal */}
+            <AuthModal
+                isOpen={authModal.isOpen}
+                initialTab={authModal.tab}
+                onClose={() => setAuthModal({ isOpen: false, tab: 'login' })}
+            />
 
             {/* Footer */}
             <footer className="bg-surface border-t border-border mt-20 pt-16 pb-8">
