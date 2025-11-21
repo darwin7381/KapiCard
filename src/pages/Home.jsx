@@ -9,6 +9,7 @@ import BlogCard from '../components/BlogCard';
 import Button from '../components/ui/Button';
 import Badge from '../components/ui/Badge';
 import GlassCard from '../components/ui/GlassCard';
+import CardVisual from '../components/CardVisual';
 import SEO from '../components/SEO';
 import { cards } from '../data/cards';
 import { blogPosts } from '../data/blog';
@@ -48,18 +49,23 @@ const Home = () => {
     return (
         <div className="min-h-screen">
             <SEO
-                title="Home - Find Your Perfect Credit Card"
-                description="Compare credit cards and find the best rewards, sign-up bonuses, and benefits for your lifestyle."
+                title="Find Your Perfect Credit Card"
+                description="Compare the best credit cards for travel, cash back, and more. Maximize your rewards with KapiCard."
             />
 
-            {/* Hero Section - Large Search */}
-            <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 py-20 md:py-32">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(139,92,246,0.1),transparent_50%),radial-gradient(circle_at_70%_60%,rgba(244,114,182,0.1),transparent_50%)]" />
+            {/* Hero Section */}
+            <section className="relative pt-32 pb-20 overflow-hidden min-h-[90vh] flex items-center justify-center bg-gradient-to-br from-surface to-background">
+                {/* Background Elements */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+                    <div className="absolute top-1/2 -left-24 w-72 h-72 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
+                </div>
 
                 <div className="container mx-auto px-4 relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
                         className="text-center max-w-4xl mx-auto"
                     >
                         <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
@@ -257,6 +263,8 @@ const Home = () => {
                 </div>
             </section>
 
+
+
             {/* Best Cashback Cards - Bento Grid Dark Theme */}
             <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
                 {/* Background Accents */}
@@ -266,7 +274,7 @@ const Home = () => {
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="mb-12">
                         <Badge variant="accent" className="mb-4 bg-accent/20 text-accent border-accent/20">Top Picks</Badge>
-                        <h2 className="text-4xl font-bold mb-4">Maximize Your Cashback</h2>
+                        <h2 className="text-4xl font-bold mb-4 text-white">Maximize Your Cashback</h2>
                         <p className="text-slate-400 text-lg max-w-2xl">
                             Stop leaving money on the table. These cards offer the highest returns on your daily spending.
                         </p>
@@ -279,9 +287,9 @@ const Home = () => {
                                 {/* Big Card Visual & Details */}
                                 <div className="flex flex-col md:flex-row gap-8 items-center h-full">
                                     <div className="w-full md:w-1/2">
-                                        {/* 3D Card Tilt Effect Placeholder - using standard card for now */}
+                                        {/* 3D Card Tilt Effect Placeholder */}
                                         <div className="transform group-hover:scale-105 transition-transform duration-500">
-                                            <CreditCard card={cashbackCards[0]} />
+                                            <CardVisual card={cashbackCards[0]} />
                                         </div>
                                     </div>
                                     <div className="flex-1 space-y-6">
@@ -290,7 +298,7 @@ const Home = () => {
                                                 <Crown className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                                                 <span className="text-yellow-400 font-bold tracking-wide text-sm">EDITOR'S CHOICE</span>
                                             </div>
-                                            <h3 className="text-3xl font-bold">{cashbackCards[0].name}</h3>
+                                            <h3 className="text-3xl font-bold text-white">{cashbackCards[0].name}</h3>
                                             <p className="text-slate-400">{cashbackCards[0].bank}</p>
                                         </div>
 
@@ -301,13 +309,17 @@ const Home = () => {
                                             </div>
                                             <div className="bg-white/5 rounded-xl p-4 border border-white/5">
                                                 <p className="text-slate-400 text-xs uppercase tracking-wider mb-1">Annual Fee</p>
-                                                <p className="text-2xl font-bold">{cashbackCards[0].annualFee}</p>
+                                                <p className="text-2xl font-bold text-white">{cashbackCards[0].annualFee}</p>
                                             </div>
                                         </div>
 
                                         <div className="flex gap-3 pt-2">
-                                            <Button className="flex-1 bg-white text-slate-900 hover:bg-slate-200 border-none">Apply Now</Button>
-                                            <Button variant="outline" className="flex-1 border-white/20 text-white hover:bg-white/10 hover:text-white">Compare</Button>
+                                            <Link to={`/cards/${cashbackCards[0].id}`} className="flex-1">
+                                                <Button className="w-full bg-white text-slate-900 hover:bg-slate-200 border-none">Apply Now</Button>
+                                            </Link>
+                                            <Link to="/compare" className="flex-1">
+                                                <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white">Compare</Button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -316,7 +328,7 @@ const Home = () => {
 
                         {/* Side List - Spans 2 cols */}
                         <div className="lg:col-span-2 flex flex-col gap-4 justify-center">
-                            <h3 className="text-xl font-bold mb-2 flex items-center gap-2">
+                            <h3 className="text-xl font-bold mb-2 flex items-center gap-2 text-white">
                                 <TrendingUp className="w-5 h-5 text-accent" />
                                 Top Contenders
                             </h3>
@@ -325,12 +337,12 @@ const Home = () => {
                                     <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-4 hover:bg-white/10 transition-all cursor-pointer group hover:translate-x-1">
                                         {/* Small Visual */}
                                         <div className={`w-16 h-10 rounded-md shadow-sm flex-shrink-0 bg-gradient-to-br ${card.network === 'Visa' ? 'from-blue-500 to-indigo-700' :
-                                                card.network === 'Mastercard' ? 'from-orange-400 to-pink-600' :
-                                                    'from-blue-400 to-teal-600'
+                                            card.network === 'Mastercard' ? 'from-orange-400 to-pink-600' :
+                                                'from-blue-400 to-teal-600'
                                             }`} />
 
                                         <div className="flex-1 min-w-0">
-                                            <h4 className="font-bold truncate group-hover:text-primary transition-colors">{card.name}</h4>
+                                            <h4 className="font-bold truncate text-white group-hover:text-primary transition-colors">{card.name}</h4>
                                             <div className="flex items-center gap-2 text-sm">
                                                 <span className="text-accent font-medium">{card.rewardRate}</span>
                                                 <span className="text-slate-500">•</span>

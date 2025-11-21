@@ -14,10 +14,10 @@ const Compare = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-8">
             <SEO
-                title="Compare Credit Cards"
-                description="Compare credit cards side-by-side to find the best rewards, fees, and benefits for your needs."
+                title="Compare Cards"
+                description="Compare credit cards side-by-side to find the best rewards, interest rates, and benefits for you."
             />
 
             {/* Header */}
